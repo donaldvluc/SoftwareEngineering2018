@@ -22,4 +22,4 @@ Some of the design decisions you will need to consider include:
 
 **I plan to use an array of constant size five. I will iterate through the array and call respective methods for each horse.**
 
-![**UML Diagram**](https://github.com/donaldvluc/SoftwareEngineering2018/blob/master/src/edu/nd/se2018/homework/hwk2/HW02_UML_PNG.png)
+![**UML Diagram**](https://github.com/donaldvluc/SoftwareEngineering2018/blob/master/src/edu/nd/se2018/homework/hwk2/Software%20Development%20Practices%20HW02.png)
