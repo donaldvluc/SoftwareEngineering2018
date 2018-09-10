@@ -15,15 +15,15 @@ public class Horse {
 
 	public Horse(String n, StrategyEnum strategyEnum, double s) {
 		if (n == "") {
-			System.exit(1);
+			System.exit(2);
 		} else {
 			name = n;
 		}
 
 		setStrategy(strategyEnum);
-		System.out.println("Before speed");
+
 		if (s < 0.00) {
-			System.exit(2);
+			System.exit(3);
 		} else {
 			speed = s;
 		}

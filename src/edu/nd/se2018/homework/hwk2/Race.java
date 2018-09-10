@@ -26,16 +26,20 @@ public class Race {
 	// Public Methods:
 
 	public void addHorse(Horse horse) {
-		if (numHorses < MAX_HORSES) {
+		if (numHorses < MAX_HORSES && !inRace(horse)) {
 			horses[numHorses++] = horse;
 		}
 	}
 
 	public void start() {
-		while (!finished()) {
-			minute++;	
+		if (numHorses == 5) {
+			while (!finished()) {
+				minute++;	
+			}
+			findWinners();	
+		} else {
+			System.out.println("Must have exactly 5 horses.");
 		}
-		printWinner();
 	}
 
 	Boolean finished() {
@@ -56,22 +60,7 @@ public class Race {
 		}
 	}
 
-	// Private Methods:
-
-	private void moveHorses() {
-		for (Horse h : horses) {
-			h.move();
-		}
-	}
-
-	private void printHorses() {
-		System.out.println(minute + " minutes -------------------- ");
-		for (Horse h : horses) {
-			h.print();
-		}
-	}
-
-	private void printWinner() {
+	public int findWinners() {
 		System.out.println("-------------------------------");
 		double d = 0.00;
 		List<Horse> winners = new ArrayList<Horse>();
@@ -92,6 +81,31 @@ public class Race {
 			for (Horse h : winners) {
 				System.out.println(h.name);
 			}
+		}
+		return winners.size();
+	}
+
+	// Private Methods:
+
+	private Boolean inRace(Horse newHorse) {
+		for (Horse h : horses) {
+			if (newHorse == h) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void moveHorses() {
+		for (Horse h : horses) {
+			h.move();
+		}
+	}
+
+	private void printHorses() {
+		System.out.println(minute + " minutes -------------------- ");
+		for (Horse h : horses) {
+			h.print();
 		}
 	}
 }
