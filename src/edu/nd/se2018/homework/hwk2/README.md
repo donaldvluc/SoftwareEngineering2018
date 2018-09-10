@@ -17,4 +17,4 @@ Some of the design decisions you will need to consider include:
 5. What data structure will you use to manage horses in the race? The design rationale you write will likely be about one paragraph (maybe two) explaining your decisions. You could use these questions as an outline if you wish.
 **I plan to use an array of constant size five. I will iterate through the array and call respective methods for each horse.**
 
-![**UML Diagram**](https://github.com/donaldvluc/SoftwareEngineering2018/blob/master/src/edu/nd/se2018/homework/hwk2/HW02_UML.pdf)
+![**UML Diagram**](https://github.com/donaldvluc/SoftwareEngineering2018/blob/master/src/edu/nd/se2018/homework/hwk2/HW02_UML_PNG.png)
