@@ -25,8 +25,9 @@ public class Ship extends Observable {
 			Random r = new Random();
 			int x = r.ints(0, size).limit(1).findFirst().getAsInt();
 			int y = r.ints(0, size).limit(1).findFirst().getAsInt();
-			if (!oceanMap.isOceanObject(x*size, y*size, OceanObjects.ISLAND) && !oceanMap.isOceanObject(x, y, OceanObjects.PIRATE)) {
+			if (oceanMap.isOceanObject(x*size, y*size, OceanObjects.OPEN)) {
 				position = new Point(x*size, y*size);
+				oceanMap.setOceanCell(position.x/size, position.y/size, OceanObjects.SHIP);
 				break;
 			}
 		}
@@ -47,34 +48,47 @@ public class Ship extends Observable {
 	}
 	
 	public void goEast() {
-		if (position.x+size < size*size && 
-			!oceanMap.isOceanObject(position.x+size, position.y, OceanObjects.ISLAND) &&
-			!oceanMap.isOceanObject(position.x+size, position.y, OceanObjects.PIRATE)) {
+		if (position.x+size < size*size && oceanMap.isOceanObject(position.x+size, position.y, OceanObjects.OPEN)) 
+		{
+			oceanMap.setOceanCell(position.x/size, position.y/size, OceanObjects.OPEN);
 			position.x += size;
+			oceanMap.setOceanCell(position.x/size, position.y/size, OceanObjects.SHIP);
+			movePirates();
 		}
 	}
 	
 	public void goWest() {
-		if (position.x-size >= 0 && 
-			!oceanMap.isOceanObject(position.x-size, position.y, OceanObjects.ISLAND) && 
-			!oceanMap.isOceanObject(position.x-size, position.y, OceanObjects.PIRATE)) {
+		if (position.x-size >= 0 && oceanMap.isOceanObject(position.x-size, position.y, OceanObjects.OPEN)) 
+		{
+			oceanMap.setOceanCell(position.x/size, position.y/size, OceanObjects.OPEN);
 			position.x -= size;
+			oceanMap.setOceanCell(position.x/size, position.y/size, OceanObjects.SHIP);
+			movePirates();
 		}
 	}
 	
 	public void goNorth() {
-		if (position.y-size >= 0 && 
-		    !oceanMap.isOceanObject(position.x, position.y-size, OceanObjects.ISLAND) && 
-		    !oceanMap.isOceanObject(position.x, position.y-size, OceanObjects.PIRATE)) {
+		if (position.y-size >= 0 && oceanMap.isOceanObject(position.x, position.y-size, OceanObjects.OPEN)) 
+		{
+			oceanMap.setOceanCell(position.x/size, position.y/size, OceanObjects.OPEN);
 			position.y -= size;
+			oceanMap.setOceanCell(position.x/size, position.y/size, OceanObjects.SHIP);
+			movePirates();
 		}
 	}
 	
 	public void goSouth() {
-		if (position.y+size < size*size && 
-			!oceanMap.isOceanObject(position.x, position.y+size, OceanObjects.ISLAND) && 
-			!oceanMap.isOceanObject(position.x, position.y+size, OceanObjects.PIRATE)) {
+		if (position.y+size < size*size && oceanMap.isOceanObject(position.x, position.y+size, OceanObjects.OPEN)) 
+		{
+			oceanMap.setOceanCell(position.x/size, position.y/size, OceanObjects.OPEN);
 			position.y += size;
+			oceanMap.setOceanCell(position.x/size, position.y/size, OceanObjects.SHIP);
+			movePirates();
 		}
+	}
+	
+	private void movePirates() {
+		setChanged();
+		notifyObservers();
 	}
 }

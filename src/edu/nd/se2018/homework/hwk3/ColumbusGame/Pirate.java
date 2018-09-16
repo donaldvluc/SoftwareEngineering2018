@@ -45,29 +45,47 @@ public class Pirate implements Observer {
 	}
 
 	private void movePirate() {
-		System.out.println("wut");
+		int oldX = position.x;
+		int oldY = position.y;
 		Random r = new Random();
-		int n = r.ints(0, 1).limit(1).findFirst().getAsInt();
+		int n = r.ints(0, 2).limit(1).findFirst().getAsInt();
 		switch(n) {
 		case 0:
-			if (target.x - position.x > 0 && !oceanMap.isOceanObject(position.x+1, position.y, OceanObjects.ISLAND)) {
-				position.x--;
-			} else {
-				position.x++;
+			if (target.x - position.x > 0 && oceanMap.isOceanObject(position.x+size, position.y, OceanObjects.OPEN)) {
+				position.x += size;
+			} else if (target.x - position.x < 0 && oceanMap.isOceanObject(position.x-size, position.y, OceanObjects.OPEN)) {
+				position.x -= size;
+			} else if (target.y - position.y < 0 && oceanMap.isOceanObject(position.x, position.y-size, OceanObjects.OPEN)) {
+				position.y -= size;
+			} else if (target.y - position.y > 0 && oceanMap.isOceanObject(position.x, position.y+size, OceanObjects.OPEN)) {
+				position.y += size;
 			}
 			break;
 		case 1:
+			if (target.y - position.y < 0 && oceanMap.isOceanObject(position.x, position.y-size, OceanObjects.OPEN)) {
+				position.y -= size;
+			} else if (target.y - position.y > 0 && oceanMap.isOceanObject(position.x, position.y+size, OceanObjects.OPEN)) {
+				position.y += size;
+			} else if (target.x - position.x > 0 && oceanMap.isOceanObject(position.x+size, position.y, OceanObjects.OPEN)) {
+				position.x += size;
+			} else if (target.x - position.x > 0 && oceanMap.isOceanObject(position.x-size, position.y, OceanObjects.OPEN)) {
+				position.x -= size;
+			}
+			break;
+		default:
 			break;
 		}
+		oceanMap.setOceanCell(oldX/size, oldY/size, OceanObjects.OPEN);
+		oceanMap.setOceanCell(position.x/size, position.y/size, OceanObjects.PIRATE);
 		pirateImageView.setX(position.x);
 		pirateImageView.setY(position.y);
 	}
 	
+	
+	
 	@Override
 	public void update(Observable s, Object arg1) {
-		System.out.println("yes");
 		if (s instanceof Ship) {
-			System.out.println("no?");
 			target = ((Ship) s).getPosition();
 			movePirate();
 		}
