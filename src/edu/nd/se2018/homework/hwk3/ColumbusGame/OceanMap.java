@@ -13,13 +13,14 @@ public class OceanMap {
 	// Private Members:
 	int dimensions = 25;
 	int squared_dimensions = dimensions*dimensions;
-	final int nIslands = 10;
+	int nIslands = 10;
 	OceanObjects[][] oceanGrid = new OceanObjects[dimensions][dimensions];
 	
 	
 
-	public OceanMap(int d) {
+	public OceanMap(int d, int i) {
 		dimensions = d;
+		nIslands = i;
 	}
 	
 	public void drawMap(ObservableList<Node> root, int size) {
@@ -50,9 +51,13 @@ public class OceanMap {
 		}
 	}
 	
-	public Boolean isIsland(int x, int y) {
+	public void setOceanCell(int x, int y, OceanObjects object) {
+		oceanGrid[x][y] = object;
+	}
+	
+	public Boolean isOceanObject(int x, int y, OceanObjects object) {
 		int cellX = x / dimensions;
 		int cellY = y / dimensions;
-		return oceanGrid[cellX][cellY] == OceanObjects.ISLAND;
+		return oceanGrid[cellX][cellY] == object;
 	}
 }
