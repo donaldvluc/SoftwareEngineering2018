@@ -24,28 +24,25 @@ public class Ship {
 	}
 	
 	public void goEast() {
-		int cellX = (position.x - size/2) / size;
-		int cellY = (position.y - size/2) / size;
-		OceanObjects cell = oceanMap.getOceanGrid()[cellX][cellY];
-		if (position.x+size < size*size && cell != OceanObjects.ISLAND) {
+		if (position.x+size < size*size && !oceanMap.isIsland(position.x+size, position.y)) {
 			position.x += size;
 		}
 	}
 	
 	public void goWest() {
-		if (position.x-size >= 0) {
+		if (position.x-size >= 0 && !oceanMap.isIsland(position.x-size, position.y)) {
 			position.x -= size;
 		}
 	}
 	
 	public void goNorth() {
-		if (position.y-size >= 0) {
+		if (position.y-size >= 0 && !oceanMap.isIsland(position.x, position.y-size)) {
 			position.y -= size;
 		}
 	}
 	
 	public void goSouth() {
-		if (position.y+size < size*size) {
+		if (position.y+size < size*size && !oceanMap.isIsland(position.x, position.y+size)) {
 			position.y += size;
 		}
 	}

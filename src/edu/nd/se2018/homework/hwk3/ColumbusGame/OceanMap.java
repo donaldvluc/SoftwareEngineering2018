@@ -7,8 +7,6 @@ import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-import java.awt.Point;
-
 
 
 public class OceanMap {
@@ -44,7 +42,7 @@ public class OceanMap {
 				int y = r.ints(0, dimensions).limit(1).findFirst().getAsInt();
 				if (oceanGrid[x][y] == OceanObjects.OPEN) {
 					oceanGrid[x][y] = OceanObjects.ISLAND;
-					Rectangle rect = (Rectangle) root.get(x+y*(dimensions));
+					Rectangle rect = (Rectangle) root.get(x*(dimensions)+y);
 					rect.setFill(Color.DARKGREEN);
 					break;
 				}
@@ -52,7 +50,9 @@ public class OceanMap {
 		}
 	}
 	
-	public OceanObjects[][] getOceanGrid() {
-		return oceanGrid;
+	public Boolean isIsland(int x, int y) {
+		int cellX = x / dimensions;
+		int cellY = y / dimensions;
+		return oceanGrid[cellX][cellY] == OceanObjects.ISLAND;
 	}
 }

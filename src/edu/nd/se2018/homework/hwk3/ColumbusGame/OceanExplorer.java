@@ -26,6 +26,7 @@ public class OceanExplorer extends Application {
 
 	// Private Members:
 	final int size = 25;
+	final int squared = size*size;
 	Scene scene;
 	OceanMap oceanMap;
 	Ship ship;
@@ -58,7 +59,7 @@ public class OceanExplorer extends Application {
 		root.getChildren().add(shipImageView);
 		
 		// Setup:
-		scene = new Scene(root,size*size,size*size);
+		scene = new Scene(root,squared,squared);
 		oceanStage.setScene(scene);
 		oceanStage.show();
 		
