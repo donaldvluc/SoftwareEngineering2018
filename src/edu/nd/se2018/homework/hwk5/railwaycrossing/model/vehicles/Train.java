@@ -1,8 +1,8 @@
-package edu.nd.sarec.railwaycrossing.model.vehicles;
+package edu.nd.se2018.homework.hwk5.railwaycrossing.model.vehicles;
 
 import java.util.Observable;
 
-import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
+import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.Direction;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +28,8 @@ public class Train extends Observable implements IVehicle{
 		originalX = x;
 		img = new Image("images\\Train.PNG",120,trainLength,false,false);
 		imgView = new ImageView(img);
+		if (dir == Direction.EAST)
+			imgView.setScaleX(-1); // Else train moving west is not reversed.
 		imgView.setX(currentX);
 		imgView.setY(currentY);
 	}
@@ -41,17 +43,28 @@ public class Train extends Observable implements IVehicle{
 	}
 	
 	public void move(){
-		currentX-=2;
+		if (dir == Direction.WEST)
+			currentX-=2;
+		else
+			currentX+=2;
 		imgView.setX(currentX);
 		setChanged();
 		notifyObservers();
 	}
 	
 	public boolean offScreen(){
-		if (currentX < -200)
-			return true;
-		else
-			return false;				
+		if (dir == Direction.WEST) {
+			if (currentX < -200)
+				return true;
+			else
+				return false;	
+		}
+		else {
+			if (currentX > 1400)
+				return true;
+			else
+				return false;	
+		}			
 	}
 	
 	public void reset(){

@@ -1,17 +1,17 @@
-package edu.nd.sarec.railwaycrossing;
+package edu.nd.se2018.homework.hwk5.railwaycrossing;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
-import edu.nd.sarec.railwaycrossing.model.infrastructure.MapBuilder;
-import edu.nd.sarec.railwaycrossing.model.infrastructure.RailwayTracks;
-import edu.nd.sarec.railwaycrossing.model.infrastructure.Road;
-import edu.nd.sarec.railwaycrossing.model.infrastructure.gate.CrossingGate;
-import edu.nd.sarec.railwaycrossing.model.vehicles.Car;
-import edu.nd.sarec.railwaycrossing.model.vehicles.Train;
-import edu.nd.sarec.railwaycrossing.view.MapDisplay;
+import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.Direction;
+import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.MapBuilder;
+import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.RailwayTracks;
+import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.Road;
+import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.gate.CrossingGate;
+import edu.nd.se2018.homework.hwk5.railwaycrossing.model.vehicles.Car;
+import edu.nd.se2018.homework.hwk5.railwaycrossing.model.vehicles.Train;
+import edu.nd.se2018.homework.hwk5.railwaycrossing.view.MapDisplay;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -85,7 +85,7 @@ public class Simulation extends Application{
 		
 		// Create trains "Royal" and "Park".
 		Train trainRoyal = new Train(trackRoyal.getEndX()+100,trackRoyal.getEndY()-25, Direction.WEST); // Train moves east to west.
-		Train trainPark = new Train(trackPark.getStartX()+100,trackPark.getStartY()-25, Direction.EAST); // Train moves west to east.
+		Train trainPark = new Train(trackPark.getStartX()-100,trackPark.getStartY()-25, Direction.EAST); // Train moves west to east.
 		trains.add(trainRoyal);
 		trains.add(trainPark);
 		
