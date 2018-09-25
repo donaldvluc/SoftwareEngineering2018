@@ -15,6 +15,7 @@ import javafx.scene.shape.Line;
 public class TracksDisplay implements IDisplay {
 	Pane root;
 	Collection<RailwayTracks> tracks;
+	int trackSize = 16;
 	
 	public TracksDisplay(Collection<RailwayTracks> tracks, Pane root){
 		this.root = root;
@@ -24,11 +25,10 @@ public class TracksDisplay implements IDisplay {
 	@Override
 	public void draw() {
 		for(RailwayTracks track: tracks){
-			int size = track.getSize();
-			root.getChildren().add(new Line(track.getStartX(),track.getStartY()-size,track.getEndX(),track.getEndY()-size));
-			root.getChildren().add(new Line(track.getStartX(),track.getStartY()+size,track.getEndX(),track.getEndY()+size));
-			for(int j = track.getStartX()+(size/2); j < track.getEndX(); j+=size){
-				root.getChildren().add(new Line(j,track.getStartY()-size - 2,j,track.getEndY()+size+2));
+			root.getChildren().add(new Line(track.getStartX(),track.getStartY()-trackSize,track.getEndX(),track.getEndY()-trackSize));
+			root.getChildren().add(new Line(track.getStartX(),track.getStartY()+trackSize,track.getEndX(),track.getEndY()+trackSize));
+			for(int j = track.getStartX()+(trackSize/2); j < track.getEndX(); j+=trackSize){
+				root.getChildren().add(new Line(j,track.getStartY()-trackSize - 2,j,track.getEndY()+trackSize+2));
 			}
 		}
 	}

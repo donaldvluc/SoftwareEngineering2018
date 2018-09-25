@@ -13,16 +13,14 @@ public class RailwayTracks {
 	private int endX;
 	private int startY;
 	private int endY;
-	private int trackSize;
 	
 	public RailwayTracks(){}
 	
-	public RailwayTracks(Point startPoint, Point endPoint, int size){
+	public RailwayTracks(Point startPoint, Point endPoint){
 		startX = startPoint.x;
 		startY = startPoint.y;
 		endX = endPoint.x;
 		endY = endPoint.y;
-		trackSize = size;
 	}
 	
 	public int getStartX(){
@@ -39,10 +37,6 @@ public class RailwayTracks {
 	
 	public int getEndY(){
 		return endY;
-	}
-	
-	public int getSize() {
-		return trackSize;
 	}
 	
 	@Override 

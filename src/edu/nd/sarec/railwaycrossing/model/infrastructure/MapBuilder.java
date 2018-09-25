@@ -35,13 +35,11 @@ public class MapBuilder {
 	
 	private void buildCrossingGates(){
 		gates.put("Gate1", new CrossingGate(780,480, "Gate1"));
-		gates.put("Gate2", new CrossingGate(380,480, "Gate2"));	
+		gates.put("Gate2", new CrossingGate(380,480, "Gate2"));		
 	}
 	
 	private void buildTracks(){
-		int trackSize = 16;
-		tracks.put("Royal", new RailwayTracks(new Point(0,500),new Point(1200,500),trackSize));
-		tracks.put("Park", new RailwayTracks(new Point(0,500+2*trackSize),new Point(1200,500+2*trackSize),trackSize));
+		tracks.put("Royal", new RailwayTracks(new Point(0,500),new Point(1200,500)));
 	}
 	
 	private void assignGatesToRoads(){
@@ -67,6 +65,6 @@ public class MapBuilder {
 	}
 	
 	public RailwayTracks getTrack(String name){
-		return tracks.get(name);
+		return tracks.get("Royal");
 	}
 }

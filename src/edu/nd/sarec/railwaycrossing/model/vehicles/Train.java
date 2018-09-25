@@ -2,7 +2,6 @@ package edu.nd.sarec.railwaycrossing.model.vehicles;
 
 import java.util.Observable;
 
-import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,12 +18,10 @@ public class Train extends Observable implements IVehicle{
 	private Image img;
 	private ImageView imgView;
 	private int trainLength = 35;
-	private Direction dir;
 	
-	public Train(int x, int y, Direction d){
+	public Train(int x, int y){
 		this.currentX = x;
 		this.currentY = y;
-		this.dir = d;
 		originalX = x;
 		img = new Image("images\\Train.PNG",120,trainLength,false,false);
 		imgView = new ImageView(img);

@@ -66,9 +66,9 @@ public class Car extends Observable implements IVehicle, Observer{
 		if (canMove){
 			currentY+=speed;
 			ivCar.setY(currentY);
-			setChanged();
-			notifyObservers();
 		}
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void setSpeed(double speed){

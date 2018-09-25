@@ -2,9 +2,7 @@ package edu.nd.sarec.railwaycrossing;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-import edu.nd.sarec.railwaycrossing.model.infrastructure.Direction;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.MapBuilder;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.RailwayTracks;
 import edu.nd.sarec.railwaycrossing.model.infrastructure.Road;
@@ -24,7 +22,6 @@ public class Simulation extends Application{
 	private Scene scene;
 	private MapBuilder mapBuilder;
 	private MapDisplay mapDisplay;
-	private List<Train> trains = new ArrayList<>();
 	
 	@Override  
 	public void start(Stage stage) throws Exception {
@@ -42,16 +39,14 @@ public class Simulation extends Application{
 		stage.setTitle("Railways");
 		stage.setScene(scene);
 		stage.show();
+				
+		// Train
+		RailwayTracks track = mapBuilder.getTrack("Royal");
+		Train train = new Train(track.getEndX()+100,track.getEndY()-25);
+		root.getChildren().add(train.getImageView());
 		
-		
-		// Create train tracks and trains 
-		createTrains(root);
-		
-		for(CrossingGate gate: mapBuilder.getAllGates()) {
-			for(Train train: trains) {
-				train.addObserver(gate);
-			}
-		}	
+		for(CrossingGate gate: mapBuilder.getAllGates())
+			train.addObserver(gate);
 				
 		// Sets up a repetitive loop i.e., in handle that runs the actual simulation
 		new AnimationTimer(){
@@ -60,42 +55,20 @@ public class Simulation extends Application{
 			public void handle(long now) {
 			
 				createCar();
-				for(Train train: trains)
-					train.move();
+				train.move();
 				
 				for(CrossingGate gate: mapBuilder.getAllGates())
 					gate.operateGate();
 				
-				for(Train train: trains) {
-					if (train.offScreen())
-						train.reset();
-				}
-
+				if (train.offScreen())
+					train.reset();
 						
 				clearCars();				
 			}
 		}.start();
 	}
 	
-	// Create two trains "Royal" and "Park".
-	private void createTrains(Pane root) {
-		// Get railways "Royal" and "Park".
-		RailwayTracks trackRoyal = mapBuilder.getTrack("Royal");
-		RailwayTracks trackPark = mapBuilder.getTrack("Park");
-		
-		// Create trains "Royal" and "Park".
-		Train trainRoyal = new Train(trackRoyal.getEndX()+100,trackRoyal.getEndY()-25, Direction.WEST); // Train moves east to west.
-		Train trainPark = new Train(trackPark.getStartX()+100,trackPark.getStartY()-25, Direction.EAST); // Train moves west to east.
-		trains.add(trainRoyal);
-		trains.add(trainPark);
-		
-		// Add trains to the root.
-		root.getChildren().add(trainRoyal.getImageView());
-		root.getChildren().add(trainPark.getImageView());
-	}
-	
-	
-	// Clears cars as they leave the simulation.
+	// Clears cars as they leave the simulation
 	private void clearCars(){
 		Collection<Road> roads = mapBuilder.getRoads();
 		for(Road road: roads){			
@@ -106,7 +79,6 @@ public class Simulation extends Application{
 		}
 	}
 	
-	// Creates random colored cars onto each road.
 	private void createCar(){
 		Collection<Road> roads = mapBuilder.getRoads();
 		for(Road road: roads){
