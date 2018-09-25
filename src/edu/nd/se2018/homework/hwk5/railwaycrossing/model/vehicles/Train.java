@@ -24,12 +24,12 @@ public class Train extends Observable implements IVehicle{
 	public Train(int x, int y, Direction d){
 		this.currentX = x;
 		this.currentY = y;
-		this.dir = d;
+		this.dir = d; // Either West or East.
 		originalX = x;
 		img = new Image("images\\Train.PNG",120,trainLength,false,false);
 		imgView = new ImageView(img);
 		if (dir == Direction.EAST)
-			imgView.setScaleX(-1); // Else train moving west is not reversed.
+			imgView.setScaleX(-1); // Reverse image of eastbound train.
 		imgView.setX(currentX);
 		imgView.setY(currentY);
 	}

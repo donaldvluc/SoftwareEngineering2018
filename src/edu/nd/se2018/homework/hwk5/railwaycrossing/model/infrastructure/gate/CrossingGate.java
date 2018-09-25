@@ -128,8 +128,7 @@ public class CrossingGate extends Observable implements Observer{
 			int trigger = this.triggerPoint;
 			int leftBound = exit; // The bound to the left of exit.
 			int rightBound = trigger; // The bound to the right of trigger.
-			if (train.getDirection() == Direction.WEST) // Westbound train.
-			{
+			if (train.getDirection() == Direction.WEST) { // Westbound train.
 				exit -= delta/2;
 				trigger += delta;
 				leftBound = exit-delta/4;
@@ -147,8 +146,7 @@ public class CrossingGate extends Observable implements Observer{
 					currentGateState.leaveStation();
 				else if(train.getVehicleX() < trigger && train.getVehicleX() > rightBound)
 					currentGateState.approachStation();
-			}
-			else { // Eastbound train.
+			} else { // Eastbound train.
 				if (train.getVehicleX() > exit && train.getVehicleX() < leftBound)
 					currentGateState.leaveStation();
 				else if(train.getVehicleX() > trigger && train.getVehicleX() < rightBound)

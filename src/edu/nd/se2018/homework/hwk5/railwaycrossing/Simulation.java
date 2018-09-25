@@ -60,6 +60,7 @@ public class Simulation extends Application{
 			public void handle(long now) {
 			
 				createCar();
+				
 				for(Train train: trains)
 					train.move();
 				
@@ -71,6 +72,17 @@ public class Simulation extends Application{
 						train.reset();
 				}
 
+				// Randomize car on east road, Skyway, to cross road, EastWest.
+				// README.md - Mention these magic numbers.
+				for (Car car: mapBuilder.getRoad("Skyway").getCarFactory().getCars()) {
+					if (car.getVehicleY() > mapBuilder.getRoad("EastWest").getStartY()-10 && car.isTurning()) {
+						car.canTurn(true);
+
+						// Car has finished crossing to Western Highway.
+						if (car.getVehicleX() < mapBuilder.getRoad("Western Highway").getStartX()-10)
+							car.canTurn(false);
+					}
+				}
 						
 				clearCars();				
 			}

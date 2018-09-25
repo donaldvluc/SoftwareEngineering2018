@@ -1,6 +1,7 @@
 package edu.nd.se2018.homework.hwk5.railwaycrossing.model.vehicles;
 
 import java.awt.Point;
+import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -28,7 +29,6 @@ public class CarFactory {
 		this.location = location;
 		this.gates = gates;
 	}
-	
 	
 	// Most code here is to create random speeds
 	public Car buildCar(){
@@ -71,5 +71,10 @@ public class CarFactory {
 		for (Car car: toDelete)
 			cars.remove(car);
 		return toDelete;
+	}
+	
+	// Returns the current list of cars.
+	public ArrayList<Car> getCars() {
+		return cars;
 	}
 }

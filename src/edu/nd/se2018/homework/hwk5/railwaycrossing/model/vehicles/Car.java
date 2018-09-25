@@ -2,6 +2,7 @@ package edu.nd.se2018.homework.hwk5.railwaycrossing.model.vehicles;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.gate.CrossingGate;
 import edu.nd.se2018.homework.hwk5.railwaycrossing.view.CarImageSelector;
@@ -20,8 +21,11 @@ public class Car extends Observable implements IVehicle, Observer{
 	private double originalY = 0;
 	private boolean gateDown = false;
 	private double leadCarY = -1;  // Current Y position of car directly infront of this one
+	private double leadCarX = -1;  // Current X position of car directly infront of this one 
 	private double speed = 0.5;
-		
+	private Boolean willTurn = false;  // Boolean for turning onto road EastWest randomized at Constructor.
+	private Boolean canTurn = false;   // Boolean for checking if car is at EastWest intersection.
+
 	/**
 	 * Constructor
 	 * @param x initial x coordinate of car
@@ -34,6 +38,12 @@ public class Car extends Observable implements IVehicle, Observer{
 		ivCar = new ImageView(CarImageSelector.getImage());
 		ivCar.setX(getVehicleX());
 		ivCar.setY(getVehicleY());
+		
+		// The percent chance out of 100 to turn onto EastWest highway.
+		Random r = new Random();
+		int n = r.ints(0, 100).limit(1).findFirst().getAsInt();
+		if (n < 25)
+			this.willTurn = true;
 	}
 		
 	@Override
@@ -64,8 +74,13 @@ public class Car extends Observable implements IVehicle, Observer{
 			canMove = false;
 		
 		if (canMove){
-			currentY+=speed;
-			ivCar.setY(currentY);
+			if (!canTurn) {
+				currentY+=speed;
+				ivCar.setY(currentY);
+			} else {
+				currentX-=speed;
+				ivCar.setX(currentX);
+			}
 		}
 		setChanged();
 		notifyObservers();
@@ -97,13 +112,28 @@ public class Car extends Observable implements IVehicle, Observer{
 	public void removeLeadCar(){
 		leadCarY = -1;
 	}
+	
+	// Turn the car onto road EastWest.
+	public void canTurn(Boolean flag) {
+		canTurn = flag;
+	}
+	
+	public Boolean isTurning() {
+		return willTurn;
+	}
 
 	@Override
 	public void update(Observable o, Object arg1) {
 		if (o instanceof Car){
-			leadCarY = (((Car)o).getVehicleY());
-			if (leadCarY > 1020)
+			Car car = (Car)o;
+			leadCarY = car.getVehicleY();
+			leadCarX = car.getVehicleX();
+			
+			// Check if car is out of display or turning, then remove observable.
+			if (leadCarY > 1020) //|| car.isTurning())
 				leadCarY = -1;
+//			else if (!car.isTurning())
+//				leadCarX = -1;
 		}
 			
 		if (o instanceof CrossingGate){
