@@ -3,6 +3,7 @@ package edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.gate;
 import java.util.Observable;
 import java.util.Observer;
 
+import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.Direction;
 import edu.nd.se2018.homework.hwk5.railwaycrossing.model.vehicles.Train;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -30,19 +31,21 @@ public class CrossingGate extends Observable implements Observer{
 	private IGateState currentGateState;
 	private Line line; 
 	private Pane root;
+	private Direction dir;
+	private int delta = 200;
 	
 	String gateName;
 	
 	public CrossingGate(){}
 	
-	public CrossingGate(int xPosition, int yPosition, String crossingGate){		
+	public CrossingGate(int xPosition, int yPosition, String crossingGate, Direction d){		
 		anchorX = xPosition;
 		anchorY = yPosition;
 		movingX = anchorX;
 		movingY = anchorY-60;
-		triggerPoint = anchorX+250;
-		exitPoint = anchorX-250;
-		
+		dir = d; // Either East or West Gate.
+		triggerPoint = anchorX; // Used with delta in update().
+		exitPoint = anchorX; // Used with delta in update().
 		// Gate elements
 		line = new Line(anchorX, anchorY,movingX,movingY);
 		line.setStroke(Color.RED);
@@ -119,11 +122,38 @@ public class CrossingGate extends Observable implements Observer{
 	public void update(Observable o, Object arg) {
 		if (o instanceof Train){
 			Train train = (Train)o;
-			if (train.getVehicleX() < exitPoint)
-				currentGateState.leaveStation();
-			else if(train.getVehicleX() < triggerPoint){
-				currentGateState.approachStation();
-			} 
-		}	
+			
+			// Calculate exit and trigger points based on train direction.
+			int exit = this.exitPoint;
+			int trigger = this.triggerPoint;
+			int leftBound = exit; // The bound to the left of exit.
+			int rightBound = trigger; // The bound to the right of trigger.
+			if (train.getDirection() == Direction.WEST) // Westbound train.
+			{
+				exit -= delta/2;
+				trigger += delta;
+				leftBound = exit-delta/4;
+				rightBound = trigger-delta/4;
+			} else { // Eastbound train.
+				exit += delta/2;
+				trigger -= delta;
+				leftBound = exit+delta/4;
+				rightBound = trigger+delta/4;
+			}
+			
+			// Check direction of train and if train is within |exit-leftBound| and |trigger-rightBound| for state change.
+			if (train.getDirection() == Direction.WEST) {
+				if (train.getVehicleX() < exit && train.getVehicleX() > leftBound)
+					currentGateState.leaveStation();
+				else if(train.getVehicleX() < trigger && train.getVehicleX() > rightBound)
+					currentGateState.approachStation();
+			}
+			else { // Eastbound train.
+				if (train.getVehicleX() > exit && train.getVehicleX() < leftBound)
+					currentGateState.leaveStation();
+				else if(train.getVehicleX() > trigger && train.getVehicleX() < rightBound)
+					currentGateState.approachStation();
+			}
+		}
 	}
 }

@@ -42,6 +42,10 @@ public class Train extends Observable implements IVehicle{
 		return currentY;
 	}
 	
+	public Direction getDirection() {
+		return dir;
+	}
+	
 	public void move(){
 		if (dir == Direction.WEST)
 			currentX-=2;

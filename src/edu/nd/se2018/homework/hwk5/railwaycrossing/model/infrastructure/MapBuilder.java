@@ -34,8 +34,8 @@ public class MapBuilder {
 	}
 	
 	private void buildCrossingGates(){
-		gates.put("Gate1", new CrossingGate(780,480, "Gate1"));
-		gates.put("Gate2", new CrossingGate(380,480, "Gate2"));	
+		gates.put("Gate1", new CrossingGate(780,480, "Gate1", Direction.EAST));
+		gates.put("Gate2", new CrossingGate(380,480, "Gate2", Direction.WEST));	
 	}
 	
 	private void buildTracks(){
