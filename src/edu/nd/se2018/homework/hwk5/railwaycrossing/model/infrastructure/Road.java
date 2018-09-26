@@ -87,8 +87,4 @@ public class Road {
 	public int getRoadWidth(){
 		return roadSize;
 	}
-	
-//	public ArrayList<Car> getCars() {
-//		return cars;
-//	}
 }
