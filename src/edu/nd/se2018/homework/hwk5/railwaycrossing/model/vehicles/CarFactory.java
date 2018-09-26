@@ -72,7 +72,7 @@ public class CarFactory {
 			cars.remove(car);
 		return toDelete;
 	}
-	
+
 	// Returns the current list of cars.
 	public ArrayList<Car> getCars() {
 		return cars;

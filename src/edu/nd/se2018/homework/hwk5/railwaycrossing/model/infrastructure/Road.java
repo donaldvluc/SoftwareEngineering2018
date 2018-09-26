@@ -1,10 +1,12 @@
 package edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Vector;
 
 import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.gate.CrossingGate;
+import edu.nd.se2018.homework.hwk5.railwaycrossing.model.vehicles.Car;
 import edu.nd.se2018.homework.hwk5.railwaycrossing.model.vehicles.CarFactory;
 
 /**
@@ -23,9 +25,11 @@ public class Road {
 	boolean clearEnds = false;
 	int roadSize;
 	
+	
 	public Road(){}
 	
-	public Road(Point start, Point end, Direction direction, boolean buildCarFactory, boolean clearEnds){
+	// README.md: Changed function signature with unused boolean buildCarFactory.
+	public Road(Point start, Point end, Direction direction, boolean clearEnds){
 		startX = start.x;
 		startY = start.y;
 		endX = end.x;
@@ -83,4 +87,8 @@ public class Road {
 	public int getRoadWidth(){
 		return roadSize;
 	}
+	
+//	public ArrayList<Car> getCars() {
+//		return cars;
+//	}
 }

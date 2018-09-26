@@ -3,6 +3,7 @@ package edu.nd.se2018.homework.hwk5.railwaycrossing;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.LinkedList;
 
 import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.Direction;
 import edu.nd.se2018.homework.hwk5.railwaycrossing.model.infrastructure.MapBuilder;
@@ -24,7 +25,8 @@ public class Simulation extends Application{
 	private Scene scene;
 	private MapBuilder mapBuilder;
 	private MapDisplay mapDisplay;
-	private List<Train> trains = new ArrayList<>();
+	private List<Train> trains = new ArrayList<>(); // Two trains: Westbound and newly added Eastboud.
+	private LinkedList<Car> crossingCars = new LinkedList<>(); // The cars crossing the EastWest highway.
 	
 	@Override  
 	public void start(Stage stage) throws Exception {
@@ -75,15 +77,36 @@ public class Simulation extends Application{
 				// Randomize car on east road, Skyway, to cross road, EastWest.
 				// README.md - Mention these magic numbers.
 				for (Car car: mapBuilder.getRoad("Skyway").getCarFactory().getCars()) {
-					if (car.getVehicleY() > mapBuilder.getRoad("EastWest").getStartY()-10 && car.isTurning()) {
-						car.canTurn(true);
+					// Car is in range of turn so turn if randomized willTurn variable is set to true.
+					if (car.getVehicleY() > mapBuilder.getRoad("EastWest").getStartY()-10 && car.getWillTurn()) {
+						
+						car.setTurn(true);
+						if (!crossingCars.contains(car)) {
+							if (crossingCars.size() != 0)
+								crossingCars.getLast().addObserver(car);
+							crossingCars.add(car);
+						}
 
-						// Car has finished crossing to Western Highway.
 						if (car.getVehicleX() < mapBuilder.getRoad("Western Highway").getStartX()-10)
-							car.canTurn(false);
+							car.setTurn(false);
+
+						
+
+						// Update linked list of crossing cars and set observer.
+						
+//						
+//						else {
+//							// Car has finished crossing to Western Highway.
+//							if (car.getVehicleX() < mapBuilder.getRoad("Western Highway").getStartX()-10) {
+//								car.setTurn(false);
+//								crossingCars.removeFirst();
+//								if (crossingCars.size() != 0)
+//									car.deleteObserver(crossingCars.getFirst());
+//							}
+//						}
 					}
 				}
-						
+
 				clearCars();				
 			}
 		}.start();

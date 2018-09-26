@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 /**
  * Represents Car object
  * @author jane
+ * README.md: Mention the turn Booleans and how it is randomized in constructor.
  *
  */
 public class Car extends Observable implements IVehicle, Observer{
@@ -20,11 +21,10 @@ public class Car extends Observable implements IVehicle, Observer{
 	private double currentY = 0;
 	private double originalY = 0;
 	private boolean gateDown = false;
-	private double leadCarY = -1;  // Current Y position of car directly infront of this one
-	private double leadCarX = -1;  // Current X position of car directly infront of this one 
+	private double leadCarY = -1;  // Current Y position of car directly infront of this one.
 	private double speed = 0.5;
 	private Boolean willTurn = false;  // Boolean for turning onto road EastWest randomized at Constructor.
-	private Boolean canTurn = false;   // Boolean for checking if car is at EastWest intersection.
+	private Boolean turn = false;      // Boolean for checking if car is at EastWest intersection.
 
 	/**
 	 * Constructor
@@ -74,10 +74,10 @@ public class Car extends Observable implements IVehicle, Observer{
 			canMove = false;
 		
 		if (canMove){
-			if (!canTurn) {
+			if (!turn) { // Moving down.
 				currentY+=speed;
 				ivCar.setY(currentY);
-			} else {
+			} else { // Moving left.
 				currentX-=speed;
 				ivCar.setX(currentX);
 			}
@@ -114,11 +114,15 @@ public class Car extends Observable implements IVehicle, Observer{
 	}
 	
 	// Turn the car onto road EastWest.
-	public void canTurn(Boolean flag) {
-		canTurn = flag;
+	public void setTurn(Boolean flag) {
+		turn = flag;
 	}
 	
-	public Boolean isTurning() {
+	public Boolean getTurn() {
+		return turn;
+	}
+	
+	public Boolean getWillTurn() {
 		return willTurn;
 	}
 
@@ -127,13 +131,12 @@ public class Car extends Observable implements IVehicle, Observer{
 		if (o instanceof Car){
 			Car car = (Car)o;
 			leadCarY = car.getVehicleY();
-			leadCarX = car.getVehicleX();
 			
 			// Check if car is out of display or turning, then remove observable.
-			if (leadCarY > 1020) //|| car.isTurning())
+			if (leadCarY > 1020 || car.getTurn()) { // 1020 is magic number from jane.
 				leadCarY = -1;
-//			else if (!car.isTurning())
-//				leadCarX = -1;
+				car.deleteObserver(this);
+			}
 		}
 			
 		if (o instanceof CrossingGate){
