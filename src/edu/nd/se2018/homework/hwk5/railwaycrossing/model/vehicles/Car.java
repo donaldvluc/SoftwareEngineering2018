@@ -21,7 +21,7 @@ public class Car extends Observable implements IVehicle, Observer{
 	private double currentY = 0;
 	private double originalY = 0;
 	private boolean gateDown = false;
-	private double leadCarY = -1;  // Current Y position of car directly infront of this one.
+	private double leadCarY = -1;  // Current Y position of car directly in front of this one.
 	private double speed = 0.5;
 	private Boolean willTurn = false;  // Boolean for turning onto road EastWest randomized at Constructor.
 	private Boolean turn = false;      // Boolean for checking if car is at EastWest intersection.
@@ -42,7 +42,7 @@ public class Car extends Observable implements IVehicle, Observer{
 		// The percent chance out of 100 to turn onto EastWest highway.
 		Random r = new Random();
 		int n = r.ints(0, 100).limit(1).findFirst().getAsInt();
-		if (n < 25)
+		if (n < 50)
 			this.willTurn = true;
 	}
 		
@@ -64,24 +64,26 @@ public class Car extends Observable implements IVehicle, Observer{
 	
 	public void move(){
 		boolean canMove = true; 
-		
+
 		// First case.  Car is at the front of the stopping line.
 		if (gateDown && getVehicleY() < 430 && getVehicleY()> 390)
 			canMove = false;
 		
 		// Second case. Car is too close too other car.
-		if (leadCarY != -1  && getDistanceToLeadCar() < 50)
+		if (leadCarY != -1  && getDistanceToLeadCarY() < 50)
 			canMove = false;
 		
-		if (canMove){
-			if (!turn) { // Moving down.
+		
+		if (canMove) {
+			if (!turn) {
 				currentY+=speed;
 				ivCar.setY(currentY);
-			} else { // Moving left.
+			} else {
 				currentX-=speed;
 				ivCar.setX(currentX);
 			}
 		}
+
 		setChanged();
 		notifyObservers();
 	}
@@ -105,7 +107,7 @@ public class Car extends Observable implements IVehicle, Observer{
 		currentY = originalY;
 	}
 	
-	public double getDistanceToLeadCar(){
+	public double getDistanceToLeadCarY(){
 		return Math.abs(leadCarY-getVehicleY());
 	}
 	
