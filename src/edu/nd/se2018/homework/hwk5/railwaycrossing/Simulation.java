@@ -75,7 +75,6 @@ public class Simulation extends Application{
 				}
 
 				// Randomize car on east road, Skyway, to cross road, EastWest.
-				// README.md - Mention these magic numbers.
 				for (Car car: mapBuilder.getRoad("Skyway").getCarFactory().getCars()) {
 					// Car is in range of turn so turn if randomized willTurn variable is set to true.
 					if (car.getVehicleY() > mapBuilder.getRoad("EastWest").getStartY()-10 && car.getWillTurn()) {
@@ -89,21 +88,6 @@ public class Simulation extends Application{
 
 						if (car.getVehicleX() < mapBuilder.getRoad("Western Highway").getStartX()-10)
 							car.setTurn(false);
-
-						
-
-						// Update linked list of crossing cars and set observer.
-						
-//						
-//						else {
-//							// Car has finished crossing to Western Highway.
-//							if (car.getVehicleX() < mapBuilder.getRoad("Western Highway").getStartX()-10) {
-//								car.setTurn(false);
-//								crossingCars.removeFirst();
-//								if (crossingCars.size() != 0)
-//									car.deleteObserver(crossingCars.getFirst());
-//							}
-//						}
 					}
 				}
 

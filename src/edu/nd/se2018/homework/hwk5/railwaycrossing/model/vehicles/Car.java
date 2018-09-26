@@ -12,7 +12,6 @@ import javafx.scene.image.ImageView;
 /**
  * Represents Car object
  * @author jane
- * README.md: Mention the turn Booleans and how it is randomized in constructor.
  *
  */
 public class Car extends Observable implements IVehicle, Observer{

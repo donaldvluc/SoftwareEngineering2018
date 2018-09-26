@@ -28,7 +28,7 @@ public class Road {
 	
 	public Road(){}
 	
-	// README.md: Changed function signature with unused boolean buildCarFactory.
+	// Changed function signature with unused boolean buildCarFactory.
 	public Road(Point start, Point end, Direction direction, boolean clearEnds){
 		startX = start.x;
 		startY = start.y;
