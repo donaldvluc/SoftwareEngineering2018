@@ -1,15 +1,37 @@
-FA18-CSE-40793-01 (Software Engineering Principles)
----------------------------------------------------
-### Homework 06: Chip's Challenge  
+FA18-CSE-40793-01: Software Engineering Principles  
+Homework 06: Chips Challenge  
+--------------------------------------------------
 ### Author: Donald Luc
-### Date: October 18, 2018
-
-
-Screen Shots  
-------------
-<<TODO>>  
+### Date: Fall 2018
 
 
 UML Diagram  
 -----------
-<<TODO>>  
+INSERT HERE
+
+
+Intermediate Accomplishments  
+----------------------------
+
+### Complete Features
+- a
+- b
+- c
+
+
+### Incomplete Features
+- x
+- y
+- z
+
+
+### Screenshots
+- i
+- j
+- k
+
+
+Final Accomplishments  
+---------------------
+TODO
+
