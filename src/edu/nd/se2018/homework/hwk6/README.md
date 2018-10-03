@@ -7,7 +7,7 @@ Homework 06: Chips Challenge
 
 UML Diagram  
 -----------
-INSERT HERE
+![](screenshots/ChipsChallengeUML.PNG)
 
 
 Intermediate Accomplishments  
