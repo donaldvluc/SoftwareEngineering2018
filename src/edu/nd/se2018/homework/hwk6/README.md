@@ -31,15 +31,15 @@ Intermediate Accomplishments
 
 ### Screenshots
 __Initial Game Load__
-![](screenshots/chip_init.png)
+![](screenshots/chip_init.png =625x)
 
 
 __Move To Green Key__
-![](screenshots/chip+next.png)
+![](screenshots/chip_next.png =625x)
 
 
 __Hidden Behind Green Key__
-![](screenshots/chip_hidden.png)
+![](screenshots/chip_hidden.png =625x)
 
 
 Final Accomplishments  
