@@ -1,10 +1,5 @@
 package edu.nd.se2018.homework.hwk6.ChipsChallenge;
 
-import java.util.LinkedList;
-
-import edu.nd.se2018.homework.hwk3.ColumbusGame.OceanMap;
-import edu.nd.se2018.homework.hwk3.ColumbusGame.Pirate;
-import edu.nd.se2018.homework.hwk3.ColumbusGame.Ship;
 import edu.nd.se2018.homework.hwk6.ChipsChallenge.models.Chip;
 import edu.nd.se2018.homework.hwk6.ChipsChallenge.models.maps.ChallengeMap;
 import edu.nd.se2018.homework.hwk6.ChipsChallenge.models.maps.ChallengeMapOne;
@@ -27,10 +22,11 @@ import java.util.ArrayList;
 public class ChipsChallenge extends Application {
 
 	// Private Members:
+	Chip chip;
 	Pane root;
+	final int size = 25;
 	final int challenges = 2;
 	ArrayList<ChallengeMap> challengeMaps = new ArrayList<ChallengeMap>();
-	Chip chip;
 	
 
 	// Main Function:
@@ -41,18 +37,20 @@ public class ChipsChallenge extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		root = new AnchorPane();
-		chip = new Chip();
+		chip = new Chip(size);
 		
 		// Generate Ocean Map:
-		challengeMaps.add(new ChallengeMapOne(root));
+		challengeMaps.add(new ChallengeMapOne(root, size));
 		// challengeMaps[1] = new ChallengeMapTwo();
 
-		for (ChallengeMap challenge: challengeMaps) {
-			challenge.drawMap();
-//			challenge.generateObjects();
-			challenge.setStage(stage);
-			startChallenge(challenge.getScene());
-		}
+//		for (ChallengeMap challenge: challengeMaps) {
+		ChallengeMap challenge = challengeMaps.get(0);
+		challenge.drawMap();
+		challenge.generateObjects(chip);
+		challenge.setStage(stage);
+		startChallenge(challenge.getScene());
+			
+//		}
 	}
 
 	private void startChallenge(Scene scene) {
@@ -76,6 +74,7 @@ public class ChipsChallenge extends Application {
 					default:
 						break;
 				}
+				chip.updateImageView();
 			}
 		});
 	}

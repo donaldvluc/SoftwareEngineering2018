@@ -31,7 +31,7 @@ public class Simulation extends Application{
 		// Build infrastructure
 		mapBuilder = new MapBuilder();
 		mapDisplay = new MapDisplay(root, mapBuilder.getRoads(), mapBuilder.getTracks(),mapBuilder.getAllGates());					
-		mapDisplay.drawTracks();		
+		mapDisplay.drawTracks();
 		mapDisplay.drawRoad();
 		mapDisplay.drawGate();
 		

@@ -33,7 +33,7 @@ public class Ship extends Observable {
 		}
 
 		// Set Ship Image:
-		shipImage = new Image("images\\ColumbusShip.png",size,size,true,true);
+		shipImage = new Image("edu\\nd\\se2018\\homework\\hwk6\\textures\\chipUp.PNG",size,size,true,true);
 		shipImageView = new ImageView(shipImage);
 		shipImageView.setX(position.x);
 		shipImageView.setY(position.y);
