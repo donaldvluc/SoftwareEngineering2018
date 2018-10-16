@@ -1,16 +1,21 @@
 package edu.nd.se2018.homework.homework6;
 
+import edu.nd.se2018.homework.homework6.Chip;
+
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+
 
 /**
  * 
@@ -23,6 +28,8 @@ public class ChipsChallenge extends Application {
 	// Private Members:
 	final int size = 25;
 	final int squared = size * size;
+	Scene scene;
+	Chip chip;
 	
 	// Main Function:
 	public static void main(String[] args) {
@@ -32,8 +39,7 @@ public class ChipsChallenge extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		Pane root = new AnchorPane();
-		
-//		challengeMap = new ChallengeMap()
+		chip = new Chip(size, 2); // 2 Chips
 		
 		// Draw Challenge:
 		ObservableList<Node> c = root.getChildren();
@@ -48,19 +54,41 @@ public class ChipsChallenge extends Application {
 			}
 		}
 		
+		// Draw Chip:
+		c.add(chip.getImageView());
+		
 		// Setup:
-		Scene scene = new Scene(root, squared, squared);
+		scene = new Scene(root, squared, squared);
 		stage.setTitle("Chips Challenge One: DLUC");
 		stage.setScene(scene);
 		stage.show();
 
 		// Start Challenge:
 		startChallenge();
-		
 	}
 
 	private void startChallenge() {
-		
-		
+		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent ke) {
+				switch(ke.getCode()) {
+					case UP:
+						chip.moveUp();
+						break;
+					case DOWN:
+						chip.moveDown();
+						break;
+					case RIGHT:
+						chip.moveRight();
+						break;
+					case LEFT:
+						chip.moveLeft();
+						break;
+					default:
+						break;
+				}
+				chip.updateImageView();
+			}
+		});
 	}
 }
