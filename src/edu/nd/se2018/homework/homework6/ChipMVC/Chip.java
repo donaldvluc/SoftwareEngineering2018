@@ -13,7 +13,7 @@ public class Chip extends Observable {
 	private Point pos;
 	private int size;
 	private int chips;
-	private int[] keys;
+	private int[] keys = new int[] {0, 0, 0, 0} ;
 	private int[][] grid;
 	private KeyCode dir;
 	private ChipImage chipImage;
@@ -79,29 +79,57 @@ public class Chip extends Observable {
 		}
 	}
 	
-	private boolean checkMove(int x, int y) {
+	private Boolean checkMove(int x, int y) {
+		Boolean flag = true;
 		int tile = grid[x][y];
 		eTiles eTile = eTiles.valueOf(tile);
 		if (eTile == eTiles.WALL)
-			return false;
+			flag = false;
 		else {
 			switch (eTile) {
 			case B_KEY:
+				keys[eColors.BLUE.getValue()]++;
+				flag = true;
+				break;
 			case G_KEY:
+				keys[eColors.GREEN.getValue()]++;
+				flag = true;
+				break;
 			case R_KEY:
+				keys[eColors.RED.getValue()]++;
+				flag = true;
+				break;
 			case Y_KEY:
-				System.out.println("KEY");
+				keys[eColors.YELLOW.getValue()]++;
+				flag = true;
 				break;
 			case B_WALL:
+				if (keys[eColors.BLUE.getValue()] == 0)
+					flag = false;
+				break;
 			case G_WALL:
+				if (keys[eColors.GREEN.getValue()] == 0)
+					flag = true;
+				break;
 			case R_WALL:
+				if (keys[eColors.RED.getValue()] == 0)
+					flag = true;
+				break;
 			case Y_WALL:
-				System.out.println("COLORED WALL");
+				if (keys[eColors.YELLOW.getValue()] == 0)
+					flag = true;
+				break;
 			default:
 				break;
 			}
-			return true;
+			String s = "";
+			for (int nKeys : keys) {
+				s += nKeys + ", ";
+			}
+			System.out.println(s);
 		}
+		System.out.println(flag);
+		return flag;
 	}
 	
 	public ImageView getImageView() {

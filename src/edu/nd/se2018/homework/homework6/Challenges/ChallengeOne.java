@@ -44,8 +44,8 @@ public class ChallengeOne implements Challenge, Observer {
 			{ 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4}, // 15
 			{ 4, 0, 0, 0, 4, 4, 4, 4, 4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4}, // 16
 			{ 4, 0, 0, 4, 0, 0, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 4}, // 17
-			{ 4, 0, 0, 4, 0, 0, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0,11, 4, 4, 4, 4, 0, 0, 4}, // 18
-			{ 4, 0, 0, 4, 0, 3, 0, 4, 0, 4, 0, 0,12, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 4}, // 19
+			{ 4, 0, 0, 4, 0, 0, 0, 0, 0, 4, 0, 0,12, 0, 0, 0, 0,11, 4, 4, 4, 4, 0, 0, 4}, // 18
+			{ 4, 0, 0, 4, 0, 3, 0, 4, 0, 4, 0, 0, 4, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 0, 4}, // 19
 			{ 4, 0, 0, 4, 0, 0, 0, 4, 5, 4, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 4}, // 20
 			{ 4, 0, 0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 4}, // 21
 			{ 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4}, // 22
@@ -88,7 +88,12 @@ public class ChallengeOne implements Challenge, Observer {
 			Chip chip = (Chip)o;
 			int x = chip.getX();
 			int y = chip.getY();
-			if (grid[x][y] != eTiles.BLANK.getType()) {
+			int tile = grid[x][y];
+			eTiles eTile = eTiles.valueOf(tile);
+			
+			
+			
+			if (grid[x][y] != eTiles.BLANK.getValue()) {
 				System.out.println("NOT BLANK: " + x + ", " + y);
 				if (target.x == x && target.y == y) {
 					System.out.println("COMPLETE");

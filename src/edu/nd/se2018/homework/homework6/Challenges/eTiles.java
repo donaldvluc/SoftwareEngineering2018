@@ -48,7 +48,7 @@ public enum eTiles {
 		return (String) sMap.get(n);
 	}
 
-	public int getType() {
+	public int getValue() {
 		return value;
 	}
 }
