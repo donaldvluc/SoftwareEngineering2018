@@ -1,4 +1,4 @@
-package edu.nd.se2018.homework.homework6.Chip;
+package edu.nd.se2018.homework.homework6.ChipMVC;
 
 import java.awt.Point;
 import java.util.Observable;
@@ -29,6 +29,8 @@ public class Chip extends Observable {
 	public int getY() { return pos.y; }
 	
 	public KeyCode getDir() { return dir; }
+	
+	public void reset() { pos = new Point(0, 0); }
 
 	public void moveUp(KeyCode c) {
 		if (pos.y > 0) {

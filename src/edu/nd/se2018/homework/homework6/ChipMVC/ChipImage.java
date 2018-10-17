@@ -1,4 +1,4 @@
-package edu.nd.se2018.homework.homework6.Chip;
+package edu.nd.se2018.homework.homework6.ChipMVC;
 
 import java.util.Observable;
 import java.util.Observer;
