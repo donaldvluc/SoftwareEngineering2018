@@ -1,13 +1,13 @@
 package edu.nd.se2018.homework.homework6;
 
-import edu.nd.se2018.homework.homework6.Chip;
-
+import edu.nd.se2018.homework.homework6.Chip.Chip;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -28,6 +28,7 @@ public class ChipsChallenge extends Application {
 	// Private Members:
 	final int size = 25;
 	final int squared = size * size;
+	Pane root;
 	Scene scene;
 	Chip chip;
 	
@@ -38,24 +39,11 @@ public class ChipsChallenge extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		Pane root = new AnchorPane();
+		root = new AnchorPane();
 		chip = new Chip(size, 2); // 2 Chips
 		
 		// Draw Challenge:
-		ObservableList<Node> c = root.getChildren();
-		for (int x = 0; x < size; x++) {
-			for (int y = 0; y < size; y++) {
-				Rectangle rect = new Rectangle(x*size,y*size,size,size);
-				Image image = new Image("images\\blankTile.PNG", size, size, true, true);
-				ImagePattern imagePattern = new ImagePattern(image);
-				rect.setStroke(Color.BLACK);
-				rect.setFill(imagePattern);
-				c.add(rect);
-			}
-		}
-		
-		// Draw Chip:
-		c.add(chip.getImageView());
+		loadChallenge(root.getChildren());
 		
 		// Setup:
 		scene = new Scene(root, squared, squared);
@@ -65,29 +53,52 @@ public class ChipsChallenge extends Application {
 
 		// Start Challenge:
 		startChallenge();
+		
+	}
+	
+	private void loadChallenge(ObservableList<Node> c) {
+		for (int x = 0; x < size; x++) {
+			for (int y = 0; y < size; y++) {
+				Rectangle rect = new Rectangle(x*size,y*size,size,size);
+				Image image = new Image("images\\blankTile.PNG", size, size, true, true);
+				ImagePattern imagePattern = new ImagePattern(image);
+				rect.setFill(imagePattern);
+				c.add(rect);
+			}
+		}
+		
+		c.add(chip.getImageView());
 	}
 
 	private void startChallenge() {
 		scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent ke) {
-				switch(ke.getCode()) {
+				KeyCode code = ke.getCode();
+				switch(code) {
 					case UP:
-						chip.moveUp();
+						chip.moveUp(code);
 						break;
 					case DOWN:
-						chip.moveDown();
+						chip.moveDown(code);
 						break;
 					case RIGHT:
-						chip.moveRight();
+						chip.moveRight(code);
 						break;
 					case LEFT:
-						chip.moveLeft();
+						chip.moveLeft(code);
 						break;
 					default:
 						break;
 				}
-				chip.updateImageView();
+				chip.updateImage();
+
+				if (chip.isDone()) {
+					System.out.println("FOUND");
+					root.getChildren().remove(0);
+					loadChallenge(root.getChildren());
+					
+				}
 			}
 		});
 	}
