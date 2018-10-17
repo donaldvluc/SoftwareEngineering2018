@@ -34,6 +34,8 @@ public class ChipsChallenge extends Application {
 	ObservableList<Node> children;
 	Scene scene;
 	Chip chip;
+	Challenge challenge;
+	int[][] grid;
 	
 	
 	// Main Function:
@@ -48,9 +50,11 @@ public class ChipsChallenge extends Application {
 		children = root.getChildren();
 		
 		// Create Challenge:
-		Point x = new Point(4, 5);
-		chip = new Chip(size, x);
-		Challenge challenge = new ChallengeOne(size);
+		challenge = new ChallengeOne(size);
+		Point init = challenge.getInit();
+		grid = challenge.getGrid();
+		chip = new Chip(size, init, grid);
+		
 		chip.addObserver((Observer) challenge);
 		
 		challenge.init(children, size);
@@ -81,7 +85,10 @@ public class ChipsChallenge extends Application {
 					case LEFT:
 						chip.moveLeft(code);
 						break;
+					case ESCAPE:
+						System.exit(0);
 					default:
+						System.out.println(code);
 						break;
 				}
 				chip.updateImage();

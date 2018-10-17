@@ -11,4 +11,7 @@ public interface Challenge {
 	public void init(ObservableList<Node> nodes, int size);
 	public void setup(Stage stage, Scene scene);
 	public Boolean isDone(Point p);
+	public Point getInit();
+	public Point getTarget();
+	public int[][] getGrid();
 }

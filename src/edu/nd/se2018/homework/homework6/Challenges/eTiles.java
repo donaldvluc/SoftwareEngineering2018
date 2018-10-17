@@ -10,17 +10,17 @@ import java.util.Map;
 
 public enum eTiles {
 	BLANK(0, "images\\blankTile.PNG"),
-	B_KEY(1, ""),
-	B_WALL(2, ""),
-	CHIP(3, ""),
+	B_KEY(1, "images\\blueKey.PNG"),
+	B_WALL(2, "images\\blueKeyWall.PNG"),
+	CHIP(3, "images\\chipItem.PNG"),
 	WALL(4, "images\\grayWall.PNG"),
-	G_KEY(5, ""),
-	G_WALL(6, ""),
-	PORTAL(7, ""),
-	R_KEY(8, ""),
-	R_WALL(9, ""),
-	Y_KEY(11, ""),
-	Y_WALL(12, "");
+	G_KEY(5, "images\\greenKey.PNG"),
+	G_WALL(6, "images\\greenKeyWall.PNG"),
+	PORTAL(7, "images\\portal.PNG"),
+	R_KEY(8, "images\\redKey.PNG"),
+	R_WALL(9, "images\\redKeyWall.PNG"),
+	Y_KEY(11, "images\\yellowKey.PNG"),
+	Y_WALL(12, "images\\yellowKeyWall.PNG");
 	
 	
 	private final int value;
@@ -50,9 +50,5 @@ public enum eTiles {
 
 	public int getType() {
 		return value;
-	}
-	
-	public String getURI() {
-		return uri;
 	}
 }
