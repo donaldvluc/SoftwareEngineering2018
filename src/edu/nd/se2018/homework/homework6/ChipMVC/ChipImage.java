@@ -1,5 +1,6 @@
 package edu.nd.se2018.homework.homework6.ChipMVC;
 
+import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,13 +18,15 @@ public class ChipImage implements Observer {
 	private ImageView imageView;
 	
 	// Constructor:
-	public ChipImage(int s) {
+	public ChipImage(int s, Point p) {
 		size = s;
 		chipUp = new Image("images\\chipUp.PNG", size, size, true, true);
 		chipDown = new Image("images\\chipDown.PNG", size, size, true, true);
 		chipLeft = new Image("images\\chipLeft.PNG", size, size, true, true);
 		chipRight = new Image("images\\chipRight.PNG", size, size, true, true);
 		imageView = new ImageView(chipUp);
+		imageView.setX(p.x*size);
+		imageView.setY(p.y*size);
 	}
 	
 	

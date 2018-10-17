@@ -16,11 +16,10 @@ public class Chip extends Observable {
 	private ChipImage chipImage;
 	
 	// Constructor:
-	public Chip(int s, int c){
+	public Chip(int s, Point init){
 		size = s;
-		chips = c;
-		pos = new Point(0, 0);
-		chipImage = new ChipImage(size);
+		pos = init;
+		chipImage = new ChipImage(size, pos);
 		addObserver(chipImage);
 	}
 
@@ -33,28 +32,28 @@ public class Chip extends Observable {
 	public void reset() { pos = new Point(0, 0); }
 
 	public void moveUp(KeyCode c) {
-		if (pos.y > 0) {
+		if (pos.y > 1) {
 			pos.y -= 1;
 			dir = c;	
 		}
 	}
 
 	public void moveDown(KeyCode c) {
-		if (pos.y < size) {
+		if (pos.y < size-2) {
 			pos.y += 1;
 			dir = c;
 		}
 	}
 
 	public void moveLeft(KeyCode c) {
-		if (pos.x > 0) {
+		if (pos.x > 1) {
 			pos.x -= 1;
 			dir = c;
 		}
 	}
 
 	public void moveRight(KeyCode c) {
-		if (pos.x < size) {
+		if (pos.x < size-2) {
 			pos.x += 1;
 			dir = c;
 		}
