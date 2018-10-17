@@ -12,15 +12,17 @@ public class Chip extends Observable {
 	// Private Members:
 	private Point pos;
 	private int size;
-	private int[][] map;
+	private int chips;
+	private int[] keys;
+	private int[][] grid;
 	private KeyCode dir;
 	private ChipImage chipImage;
 	
 	// Constructor:
-	public Chip(int s, Point init, int[][] m){
+	public Chip(int s, Point init, int[][] g){
 		size = s;
 		pos = init;
-		map = m;
+		grid = g;
 		chipImage = new ChipImage(size, pos);
 		addObserver(chipImage);
 	}
@@ -28,6 +30,8 @@ public class Chip extends Observable {
 	public int getX() { return pos.x; }
 
 	public int getY() { return pos.y; }
+	
+	public Point getPos() { return pos; }
 	
 	public KeyCode getDir() { return dir; }
 	
@@ -76,11 +80,28 @@ public class Chip extends Observable {
 	}
 	
 	private boolean checkMove(int x, int y) {
-		int tile = map[x][y];
+		int tile = grid[x][y];
 		eTiles eTile = eTiles.valueOf(tile);
-		if (eTile == eTiles.BLANK)
+		if (eTile == eTiles.WALL)
+			return false;
+		else {
+			switch (eTile) {
+			case B_KEY:
+			case G_KEY:
+			case R_KEY:
+			case Y_KEY:
+				System.out.println("KEY");
+				break;
+			case B_WALL:
+			case G_WALL:
+			case R_WALL:
+			case Y_WALL:
+				System.out.println("COLORED WALL");
+			default:
+				break;
+			}
 			return true;
-		return false;
+		}
 	}
 	
 	public ImageView getImageView() {
@@ -90,10 +111,5 @@ public class Chip extends Observable {
 	public void updateImage() {
 		setChanged();
 		notifyObservers();
-	}
-	
-	public Boolean isDone() {
-		System.out.println(pos);
-		return pos.x == 3 && pos.y == 6;
 	}
 }

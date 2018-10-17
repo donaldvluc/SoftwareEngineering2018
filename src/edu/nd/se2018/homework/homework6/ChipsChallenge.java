@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 public class ChipsChallenge extends Application {
 
 	// Private Members:
-	final int size = 25; // MUST STAY 25
+	final int size = 25; // Keep as 25 for challenge grids.
 	final int squared = size * size;
 	static Stage stage;
 	Pane root;
