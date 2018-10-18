@@ -43,7 +43,6 @@ public class ChipsChallenge extends Application {
 	Challenge challenge;
 	
 	
-	
 	// Main Function:
 	public static void main(String[] args) {
 		launch(args);
@@ -65,9 +64,13 @@ public class ChipsChallenge extends Application {
 	}
 	
 	private void createChallenge() {
+		// Create a new scene or clear old children nodes:
+		if (scene == null)
+			scene = new Scene(root, squared, squared);
+		else
+			children.clear();
 		// Get current challenge:
 		challenge = challenges[challIndex];
-		System.out.println("Chall Index: " + challIndex);
 		Point init = challenge.getInit();
 		grid = challenge.getGrid();
 		
@@ -78,17 +81,13 @@ public class ChipsChallenge extends Application {
 		// Create challenge from design:
 		challenge.init(children, size);
 		children.add(chip.getImageView());
-		
-		// Create a new scene or reset:
-		if (scene == null)
-			scene = new Scene(root, squared, squared);
 		challenge.setup(stage, scene);
 	}
 
 
 	public void nextChallenge() {
 		// Create and start next challenge instance:
-		if (challIndex < nChallenges) {
+		if (challIndex < nChallenges - 1) {
 			challIndex++;
 			createChallenge();
 			startChallenge();
