@@ -117,7 +117,7 @@ public class ChallengeOne implements Challenge, Observer {
 				totPoints += 100;
 				System.out.println("Total Points: " + totPoints);
 				turnBlank(x, y);
-				
+				break;
 			case PORTAL:
 				challenge.nextChallenge();
 				break;

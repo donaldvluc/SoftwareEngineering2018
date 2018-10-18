@@ -56,8 +56,8 @@ public class ChipsChallenge extends Application {
 		children = root.getChildren();
 		
 		// Store Challenges:
-		challenges[0] = new ChallengeTwo(this, size);
-		challenges[1] = new ChallengeOne(this, size);
+		challenges[0] = new ChallengeOne(this, size);
+		challenges[1] = new ChallengeTwo(this, size);
 
 		// Create and start challenge instance:
 		createChallenge();
