@@ -57,4 +57,6 @@ I would have liked to added more obstacles in my challenges such as water or a b
 
 
 ### Design Patterns:
-
+![](screenshots/DesignOne.png)
+![](screenshots/DesignTwo.png)
+![](screenshots/DesignThree.png)
