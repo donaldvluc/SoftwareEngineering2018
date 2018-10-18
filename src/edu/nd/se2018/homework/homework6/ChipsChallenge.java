@@ -34,8 +34,13 @@ public class ChipsChallenge extends Application {
 	ObservableList<Node> children;
 	Scene scene;
 	Chip chip;
-	Challenge challenge;
 	int[][] grid;
+	
+	int challIndex = 0;
+	int nChallenges = 2;
+	Challenge[] challenges = new Challenge[nChallenges];
+	Challenge challenge;
+	
 	
 	
 	// Main Function:
@@ -49,22 +54,49 @@ public class ChipsChallenge extends Application {
 		root = new AnchorPane();
 		children = root.getChildren();
 		
-		// Create Challenge:
-		challenge = new ChallengeOne(size);
-		Point init = challenge.getInit();
-		grid = challenge.getGrid();
-		chip = new Chip(size, init, grid);
-		
-		chip.addObserver((Observer) challenge);
-		
-		challenge.init(children, size);
-		children.add(chip.getImageView());
-		scene = new Scene(root, squared, squared);
-		challenge.setup(stage, scene);
+		// Store Challenges:
+		challenges[0] = new ChallengeOne(this, size);
+		challenges[1] = new ChallengeTwo(this, size);
 
-		// Start Challenge:
+		// Create and start challenge instance:
+		createChallenge();
 		startChallenge();
 	}
+	
+	private void createChallenge() {
+		// Get current challenge:
+		challenge = challenges[challIndex];
+		System.out.println("Chall Index: " + challIndex);
+		Point init = challenge.getInit();
+		grid = challenge.getGrid();
+		
+		// Create chip from challenge information:
+		chip = new Chip(size, init, grid);
+		chip.addObserver((Observer) challenge);
+		
+		// Create challenge from design:
+		challenge.init(children, size);
+		children.add(chip.getImageView());
+		
+		// Create a new scene or reset:
+		scene = new Scene(root, squared, squared);
+		challenge.setup(stage, scene);
+	}
+
+
+	public void nextChallenge() {
+		// Reset current challenge:
+		
+		System.out.println("Starting Next Challenge");
+		
+		// Create and start next challenge instance:
+		challIndex++;
+		createChallenge();
+		startChallenge();
+	}
+	
+
+	public ObservableList<Node> getChildren() { return children; }	
 
 
 	private void startChallenge() {

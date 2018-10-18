@@ -11,16 +11,17 @@ public class Chip extends Observable {
 	
 	// Private Members:
 	private Point pos;
+	private Point init;
 	private int size;
-	private int chips;
 	private int[] keys = new int[] {0, 0, 0, 0} ;
 	private int[][] grid;
 	private KeyCode dir;
 	private ChipImage chipImage;
 	
 	// Constructor:
-	public Chip(int s, Point init, int[][] g){
+	public Chip(int s, Point i, int[][] g){
 		size = s;
+		init = i;
 		pos = init;
 		grid = g;
 		chipImage = new ChipImage(size, pos);
@@ -35,7 +36,11 @@ public class Chip extends Observable {
 	
 	public KeyCode getDir() { return dir; }
 	
-	public void reset() { pos = new Point(0, 0); }
+	public int[] getKeys() { return keys; }
+	
+	public int getKey(int index) { return keys[index]; }
+	
+	public void reset() { pos = init; }
 
 	public void moveUp(KeyCode c) {
 		int next = pos.y - 1;
@@ -56,8 +61,6 @@ public class Chip extends Observable {
 			}
 		}
 	}
-
-
 
 	public void moveLeft(KeyCode c) {
 		int next = pos.x - 1;
@@ -109,26 +112,20 @@ public class Chip extends Observable {
 				break;
 			case G_WALL:
 				if (keys[eColors.GREEN.getValue()] == 0)
-					flag = true;
+					flag = false;
 				break;
 			case R_WALL:
 				if (keys[eColors.RED.getValue()] == 0)
-					flag = true;
+					flag = false;
 				break;
 			case Y_WALL:
 				if (keys[eColors.YELLOW.getValue()] == 0)
-					flag = true;
+					flag = false;
 				break;
 			default:
 				break;
 			}
-			String s = "";
-			for (int nKeys : keys) {
-				s += nKeys + ", ";
-			}
-			System.out.println(s);
 		}
-		System.out.println(flag);
 		return flag;
 	}
 	

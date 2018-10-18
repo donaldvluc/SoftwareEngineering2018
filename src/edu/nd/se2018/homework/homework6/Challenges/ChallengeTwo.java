@@ -13,7 +13,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class ChallengeOne implements Challenge, Observer {
+public class ChallengeTwo implements Challenge, Observer {
 
 	// Private Members:
 	ChipsChallenge challenge;
@@ -27,7 +27,7 @@ public class ChallengeOne implements Challenge, Observer {
 	Point target = new Point (13, 11); // Change if portal (#7) on grid changes.
 	
 
-	public ChallengeOne(ChipsChallenge cc, int s) {
+	public ChallengeTwo(ChipsChallenge cc, int s) {
 		challenge = cc;
 		size = s;
 		tiles = new TileImages(size);
