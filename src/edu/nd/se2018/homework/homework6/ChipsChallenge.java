@@ -5,6 +5,7 @@ import java.util.Observer;
 
 import edu.nd.se2018.homework.homework6.Challenges.Challenge;
 import edu.nd.se2018.homework.homework6.Challenges.ChallengeOne;
+import edu.nd.se2018.homework.homework6.Challenges.ChallengeTwo;
 import edu.nd.se2018.homework.homework6.ChipMVC.Chip;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -32,7 +33,7 @@ public class ChipsChallenge extends Application {
 	static Stage stage;
 	Pane root;
 	ObservableList<Node> children;
-	Scene scene;
+	Scene scene = null;
 	Chip chip;
 	int[][] grid;
 	
@@ -55,8 +56,8 @@ public class ChipsChallenge extends Application {
 		children = root.getChildren();
 		
 		// Store Challenges:
-		challenges[0] = new ChallengeOne(this, size);
-		challenges[1] = new ChallengeTwo(this, size);
+		challenges[0] = new ChallengeTwo(this, size);
+		challenges[1] = new ChallengeOne(this, size);
 
 		// Create and start challenge instance:
 		createChallenge();
@@ -79,22 +80,23 @@ public class ChipsChallenge extends Application {
 		children.add(chip.getImageView());
 		
 		// Create a new scene or reset:
-		scene = new Scene(root, squared, squared);
+		if (scene == null)
+			scene = new Scene(root, squared, squared);
 		challenge.setup(stage, scene);
 	}
 
 
 	public void nextChallenge() {
-		// Reset current challenge:
-		
-		System.out.println("Starting Next Challenge");
-		
 		// Create and start next challenge instance:
-		challIndex++;
-		createChallenge();
-		startChallenge();
+		if (challIndex < nChallenges) {
+			challIndex++;
+			createChallenge();
+			startChallenge();
+		}
+		else
+			System.exit(0);
 	}
-	
+
 
 	public ObservableList<Node> getChildren() { return children; }	
 
