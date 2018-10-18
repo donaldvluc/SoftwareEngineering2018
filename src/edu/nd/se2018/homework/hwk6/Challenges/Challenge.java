@@ -1,11 +1,11 @@
-package edu.nd.se2018.homework.homework6.Challenges;
+package edu.nd.se2018.homework.hwk6.Challenges;
 
 import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
 
-import edu.nd.se2018.homework.homework6.ChipsChallenge;
-import edu.nd.se2018.homework.homework6.ChipMVC.Chip;
+import edu.nd.se2018.homework.hwk6.ChipsChallenge;
+import edu.nd.se2018.homework.hwk6.ChipMVC.Chip;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.Scene;

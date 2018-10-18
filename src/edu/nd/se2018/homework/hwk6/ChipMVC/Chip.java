@@ -1,9 +1,9 @@
-package edu.nd.se2018.homework.homework6.ChipMVC;
+package edu.nd.se2018.homework.hwk6.ChipMVC;
 
 import java.awt.Point;
 import java.util.Observable;
 
-import edu.nd.se2018.homework.homework6.Challenges.eTiles;
+import edu.nd.se2018.homework.hwk6.Challenges.eTiles;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 

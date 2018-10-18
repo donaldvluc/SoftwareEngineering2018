@@ -1,4 +1,4 @@
-package edu.nd.se2018.homework.homework6.ChipMVC;
+package edu.nd.se2018.homework.hwk6.ChipMVC;
 
 public enum eColors {
 	BLUE(0),

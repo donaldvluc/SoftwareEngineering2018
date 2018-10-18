@@ -1,13 +1,13 @@
-package edu.nd.se2018.homework.homework6;
+package edu.nd.se2018.homework.hwk6;
 
 import java.awt.Point;
 import java.util.Observer;
 
-import edu.nd.se2018.homework.homework6.Challenges.Challenge;
-import edu.nd.se2018.homework.homework6.Challenges.Grid;
-import edu.nd.se2018.homework.homework6.Challenges.GridOne;
-import edu.nd.se2018.homework.homework6.Challenges.GridTwo;
-import edu.nd.se2018.homework.homework6.ChipMVC.Chip;
+import edu.nd.se2018.homework.hwk6.Challenges.Challenge;
+import edu.nd.se2018.homework.hwk6.Challenges.Grid;
+import edu.nd.se2018.homework.hwk6.Challenges.GridOne;
+import edu.nd.se2018.homework.hwk6.Challenges.GridTwo;
+import edu.nd.se2018.homework.hwk6.ChipMVC.Chip;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -124,7 +124,6 @@ public class ChipsChallenge extends Application {
 					case ESCAPE:
 						System.exit(0);
 					default:
-						System.out.println(code);
 						break;
 				}
 				chip.updateImage();

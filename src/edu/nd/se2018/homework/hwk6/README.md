@@ -44,5 +44,13 @@ __Hidden Behind Green Key__
 
 Final Accomplishments  
 ---------------------
-TODO
+
+### Updated UML Diagram  
+![](screenshots/ChipsChallengeUML.png)  
+
+
+### Final Design Thoughts  
+
+
+### Design Patterns:
 

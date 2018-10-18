@@ -1,4 +1,4 @@
-package edu.nd.se2018.homework.homework6.Challenges;
+package edu.nd.se2018.homework.hwk6.Challenges;
 
 import java.awt.Point;
 
