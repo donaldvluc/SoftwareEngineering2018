@@ -46,7 +46,8 @@ Final Accomplishments
 ---------------------
 
 ### Updated UML Diagram: 
-![](screenshots/ChipsChallengeUML.png)  
+I did a lot of refactoring of my initial design because at first it would not load blank tiles properly and also the game was super laggy. As a result I started from scratch again and now my final UML Diagram is pretty different but still captures my initial impressions of MVC and Observer and more.  
+![](screenshots/ChipsChallengeUpdateUML.png)  
 
 
 ### Final Design Thoughts:  
