@@ -4,8 +4,9 @@ import java.awt.Point;
 import java.util.Observer;
 
 import edu.nd.se2018.homework.homework6.Challenges.Challenge;
-import edu.nd.se2018.homework.homework6.Challenges.ChallengeOne;
-import edu.nd.se2018.homework.homework6.Challenges.ChallengeTwo;
+import edu.nd.se2018.homework.homework6.Challenges.Grid;
+import edu.nd.se2018.homework.homework6.Challenges.GridOne;
+import edu.nd.se2018.homework.homework6.Challenges.GridTwo;
 import edu.nd.se2018.homework.homework6.ChipMVC.Chip;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -34,14 +35,13 @@ public class ChipsChallenge extends Application {
 	Pane root;
 	ObservableList<Node> children;
 	Scene scene = null;
+
 	Chip chip;
 	int[][] grid;
-	
 	int challIndex = 0;
 	int nChallenges = 2;
 	Challenge[] challenges = new Challenge[nChallenges];
 	Challenge challenge;
-	
 	
 	// Main Function:
 	public static void main(String[] args) {
@@ -55,8 +55,10 @@ public class ChipsChallenge extends Application {
 		children = root.getChildren();
 		
 		// Store Challenges:
-		challenges[0] = new ChallengeOne(this, size);
-		challenges[1] = new ChallengeTwo(this, size);
+		Grid g1 = new GridOne();
+		challenges[0] = new Challenge(this, size, g1);
+		Grid g2 = new GridTwo();
+		challenges[1] = new Challenge(this, size, g2);
 
 		// Create and start challenge instance:
 		createChallenge();
