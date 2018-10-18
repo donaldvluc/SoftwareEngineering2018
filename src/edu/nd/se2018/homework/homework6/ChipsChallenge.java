@@ -31,6 +31,7 @@ public class ChipsChallenge extends Application {
 	// Private Members:
 	final int size = 25; // Keep as 25 for challenge grids.
 	final int squared = size * size;
+	int sizeUI = 50; // The padding for the user interface at the bottom.
 	static Stage stage;
 	Pane root;
 	ObservableList<Node> children;
@@ -68,7 +69,7 @@ public class ChipsChallenge extends Application {
 	private void createChallenge() {
 		// Create a new scene or clear old children nodes:
 		if (scene == null)
-			scene = new Scene(root, squared, squared);
+			scene = new Scene(root, squared, squared + sizeUI);
 		else
 			children.clear();
 		// Get current challenge:

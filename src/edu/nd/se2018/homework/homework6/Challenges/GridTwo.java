@@ -4,6 +4,7 @@ import java.awt.Point;
 
 public class GridTwo extends Grid {
 	public GridTwo() {
+		nChips = 20;
 		init = new Point(12, 6);
 		target = new Point (12, 1);
 		grid = new int[][] {

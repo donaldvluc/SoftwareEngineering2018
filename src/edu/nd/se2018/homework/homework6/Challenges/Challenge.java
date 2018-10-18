@@ -11,6 +11,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Challenge implements Observer {
@@ -19,19 +21,22 @@ public class Challenge implements Observer {
 	ChipsChallenge challenge;
 	int[][] grid;
 	int size;
-	int nChips = 8;
+	int nChips;
 	int nKeys = 4;
 	int totPoints = 0;
 	TileImages tiles;
 	Point init;
-	Point target; // Change if portal (#7) on grid changes.
-	
+	Point target;
+	Text chipText;
+	Text scoreText;
+	Text keysText;
 
 	public Challenge(ChipsChallenge cc, int s, Grid g) {
 		challenge = cc;
 		size = s;
 		tiles = new TileImages(size);
 		grid = g.getGrid();
+		nChips = g.getChips();
 		init = g.getInit();
 		target = g.getTarget();
 	}
@@ -49,6 +54,7 @@ public class Challenge implements Observer {
 	}
 
 	public void setup(Stage stage, Scene scene) {
+		setUI();
 		stage.setTitle("Chips Challenge One: DLUC");
 		stage.setScene(scene);
 		stage.show();
@@ -60,6 +66,7 @@ public class Challenge implements Observer {
 
 	public void update(Observable o, Object arg1) {
 		if (o instanceof Chip) {
+			Boolean changed = false;
 			Chip chip = (Chip)o;
 			int x = chip.getX();
 			int y = chip.getY();
@@ -73,18 +80,20 @@ public class Challenge implements Observer {
 			case Y_KEY:
 				nKeys--;
 				turnBlank(x, y);
+				changed = true;
 				break;
 			case B_WALL:
 			case G_WALL:
 			case R_WALL:
 			case Y_WALL:
 				turnBlank(x, y);
+				changed = true;
 				break;
 			case CHIP:
 				nChips--;
 				totPoints += 100;
-				System.out.println("Total Points: " + totPoints);
 				turnBlank(x, y);
+				changed = true;
 				break;
 			case PORTAL:
 				challenge.nextChallenge();
@@ -92,6 +101,8 @@ public class Challenge implements Observer {
 			default:
 				break;
 			}
+			if (changed)
+				updateUI();
 		}
 	}
 
@@ -111,4 +122,34 @@ public class Challenge implements Observer {
 
 	public int[][] getGrid() { return grid; }
 
+	private void setUI() {
+		double width = (double)(size * size);
+
+		chipText = new Text();
+		chipText.setX(10);
+		chipText.setY(width + 20);
+		chipText.setFont(new Font("Arial", 20.0));
+		chipText.setText("Chips: " + nChips);
+		challenge.getChildren().add(chipText);
+
+		scoreText = new Text();
+		scoreText.setX(width*3/7);
+		scoreText.setY(width + 20);
+		scoreText.setFont(new Font("Arial", 20.0));
+		scoreText.setText("Score: " + totPoints);
+		challenge.getChildren().add(scoreText);
+
+		keysText = new Text();
+		keysText.setX(width - 100);
+		keysText.setY(width + 20);
+		keysText.setFont(new Font("Arial", 20.0));
+		keysText.setText("Keys: " + nKeys);
+		challenge.getChildren().add(keysText);
+	}
+
+	private void updateUI() {
+		chipText.setText("Chips: " + nChips);
+		scoreText.setText("Score: " + totPoints);
+		keysText.setText("Keys: " + nKeys);
+	}
 }
